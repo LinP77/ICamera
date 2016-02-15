@@ -11,9 +11,10 @@ import com.linpeng.icamera.utils.ScreenUtils;
  */
 public class FramingRect {
   public static Rect framingRect;
-  public static int framingRect_center_leftOffset;
-  public static int framingRect_center_topOffset;
-  public Point centerPoint;
+  public static int TOPOFFEST = 50;
+  public static int LEFTOFFEST = 30;
+  public static int POINTX;
+  public static int POINTY;
 
   public static Rect getFramingRect() {
     if (framingRect == null) {
@@ -26,20 +27,17 @@ public class FramingRect {
       }
       Point point = new Point(screenHeight, screenWidth);
       int width = point.x;
-      int height = point.y;
-      int leftOffset = 30;
-      int topOffset = 50;
       int rightOffset = width-30;
       int bottomOffset = screenHeight;
-      framingRect_center_leftOffset = (rightOffset-leftOffset)/2+leftOffset;
-      framingRect_center_topOffset = (bottomOffset-topOffset)/2+topOffset;
-      framingRect = new Rect(leftOffset, topOffset, rightOffset, bottomOffset);
+      POINTX = (rightOffset-LEFTOFFEST)/2+LEFTOFFEST;
+      POINTY = (bottomOffset-TOPOFFEST)/2+TOPOFFEST;
+      framingRect = new Rect(LEFTOFFEST, TOPOFFEST, rightOffset, bottomOffset);
     }
     return framingRect;
   }
 
   public static Point getRectCenterPoint(){
     getFramingRect();
-    return new Point(framingRect_center_leftOffset, framingRect_center_topOffset);
+    return new Point(POINTX, POINTY);
   }
 }
